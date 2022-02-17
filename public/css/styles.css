@@ -1,0 +1,5 @@
+.hover\:btn-link:hover{
+    text-decoration: underline;
+    text-underline-offset: 0.05rem;
+    transition-delay: 100ms;
+}
