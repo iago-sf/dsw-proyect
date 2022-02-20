@@ -3,9 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+        <div class="col-md-6 border border-2 border-dark position-absolute top-50 start-50 translate-middle">
+            <div class="text-center p-4">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
