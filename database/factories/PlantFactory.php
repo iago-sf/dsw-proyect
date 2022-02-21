@@ -11,6 +11,7 @@ class PlantFactory extends Factory
         'cientificName', 
         'family', 
         'description',
+        'user',
       ];
 
     /**
@@ -25,6 +26,7 @@ class PlantFactory extends Factory
             'cientificName' => $this->faker->unique()->text(10),
             'family' => $this->faker->randomElement(['Tree', 'Flower', 'Bush', 'Fungie']),
             'description' => $this->faker->sentence,
+            'user' => \App\Models\User::all()->random()->id,
         ];
     }
 }

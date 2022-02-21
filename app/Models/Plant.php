@@ -20,4 +20,9 @@ class Plant extends Model
     {
         return $this->hasMany(Image::class, 'images');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user');
+    }
 }

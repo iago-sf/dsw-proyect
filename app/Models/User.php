@@ -46,4 +46,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Like::class, 'user');
     }
+
+    public function plants()
+    {
+        return $this->hasMany(Plant::class, 'user');
+    }
 }
