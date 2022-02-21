@@ -22,8 +22,8 @@ class PlantFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'cientificName' => $this->faker->text(10),
-            'family' => $this->faker->text(15),
+            'cientificName' => $this->faker->unique()->text(10),
+            'family' => $this->faker->randomElement(['Tree', 'Flower', 'Bush', 'Fungie']),
             'description' => $this->faker->sentence,
         ];
     }

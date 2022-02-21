@@ -18,10 +18,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /* DB::delete('delete from user');
-        DB::delete('delete from plant');
-        DB::delete('delete from image');
-        DB::delete('delete from like'); */
+        DB::delete('delete from users');
+        DB::delete('delete from plants');
+        DB::delete('delete from images');
+        DB::delete('delete from likes');
         User::factory(10)->create();
         Plant::factory()->count(20)->create();
         Image::factory()->count(50)->create();
