@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6 border border-2 border-dark position-absolute top-50 start-50 translate-middle">
+        <div class="col-md-6 border border-2 border-dark position-absolute top-50 start-50 translate-middle pb-4">
             <div class="text-center p-4">{{ __('Verify Your Email Address') }}</div>
             @if (session('resent'))
                 <div class="alert alert-success" role="alert">
