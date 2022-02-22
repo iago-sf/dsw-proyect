@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row justify-content-center mx-5">
+    <div class="row justify-content-center mx-5 align-items-center">
         <div class="col col-md-8">
             <div class="row">
                 <div class="col col-md-4 text-end">
@@ -35,11 +35,28 @@
                     {{ $plant->description }}
                 </div>
             </div>
+            <div class="row">
+                <div class="col col-md-4 text-end">
+                    Contributers:
+                </div>
+                <div class="col col-md-8 text-start">
+                    @foreach($contributions as $contributer)
+                    <div class="row">
+                        {{ $contributer->contribution->name }}
+                    </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
+        
         <div class="col col-md-4 text-center">
-            <div class="mb-2"><button class="btn btn-dark w-25">Boton</button></div>
-            <div class="mb-2"><button class="btn btn-dark w-25">Boton</button></div>
-            <div class="mb-2"><button class="btn btn-dark w-25">Boton</button></div>
+            <div><button class="btn btn-outline-dark w-25 mb-2"><i class="bi bi-exclamation-diamond"></i> Report</button></div>
+            @if(Auth::user()->role == 'mod')
+            <div><button class="btn btn-outline-dark w-25 mb-2"><i class="bi bi-pencil-square"></i> Edit</button></div>
+            @endif
+            @if(Auth::user()->id == $plant->user)
+            <div><button class="btn btn-outline-dark w-25 mb-2"><i class="bi bi-trash"></i> Delete</button></div>
+            @endif
         </div>
     </div>
     <div class="row justify-content-center mx-5 p-5">

@@ -25,4 +25,9 @@ class Plant extends Model
     {
         return $this->belongsTo(User::class, 'user');
     }
+
+    public function contributions()
+    {
+        return $this->hasMany(Contributer::class, 'plant');
+    }
 }

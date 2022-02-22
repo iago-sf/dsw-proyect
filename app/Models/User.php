@@ -51,4 +51,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Plant::class, 'user');
     }
+
+    public function contributions()
+    {
+        return $this->hasMany(Contributer::class, 'contributer');
+    }
 }
