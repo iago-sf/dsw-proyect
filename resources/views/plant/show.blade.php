@@ -36,8 +36,10 @@
                 </div>
             </div>
         </div>
-        <div class="col col-md-4">
-
+        <div class="col col-md-4 text-center">
+            <div class="mb-2"><button class="btn btn-dark w-25">Boton</button></div>
+            <div class="mb-2"><button class="btn btn-dark w-25">Boton</button></div>
+            <div class="mb-2"><button class="btn btn-dark w-25">Boton</button></div>
         </div>
     </div>
     <div class="row justify-content-center mx-5 p-5">
