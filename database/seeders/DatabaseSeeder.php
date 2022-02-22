@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         ]);
         User::factory(10)->create();
         Plant::factory()->count(20)->create();
-        Image::factory()->count(50)->create();
-        Like::factory()->count(200)->create();
+        Image::factory()->count(200)->create();
+        Like::factory()->count(1000)->create();
     }
 }

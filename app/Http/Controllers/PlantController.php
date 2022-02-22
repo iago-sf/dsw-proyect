@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Plant;
 
@@ -46,7 +47,8 @@ class PlantController extends Controller
      */
     public function show(Plant $plant)
     {
-        //
+        $images = Image::where('plant', $plant->id)->with('likes')->get();
+        return view('plant/show', compact('plant', 'images'));
     }
 
     /**

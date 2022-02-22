@@ -31,7 +31,7 @@
                             🌻
                         @endif
                     </div>
-                    <div><a href="#">Go to</a></div>
+                    <div><a href="{{ Route('Plant_info', $plant->id) }}">Show all info</a></div>
                 </div>
                 @endforeach
                 </div>

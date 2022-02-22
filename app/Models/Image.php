@@ -21,6 +21,6 @@ class Image extends Model
 
     public function likes()
     {
-        return $this->hasMany(Likes::class, 'image');
+        return $this->hasMany(Like::class, 'image');
     }
 }
