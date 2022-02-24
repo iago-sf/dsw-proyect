@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Like;
+use App\Models\Image;
+use App\Models\User;
 
 class LikeController extends Controller
 {
@@ -23,17 +26,6 @@ class LikeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
     {
         //
     }
@@ -73,13 +65,25 @@ class LikeController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Image $image
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Image $image)
+    {
+        Like::firstOrNew(['user' => Auth::id(), 'image' => $image->id])->toggle();
+        return back();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Like  $like
+     * @param  \App\Models\Like $like
      * @return \Illuminate\Http\Response
      */
     public function destroy(Like $like)
     {
-        //
+
     }
 }

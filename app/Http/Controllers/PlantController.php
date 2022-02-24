@@ -49,7 +49,10 @@ class PlantController extends Controller
     public function show(Plant $plant)
     {
         $contributions = Contributer::where('plant', $plant->id)->with('contribution')->get();
-        $images = Image::where('plant', $plant->id)->with('likes')->get();
+        $images = Image::where('plant', $plant->id)->with('likes')->latest('updated_at')->paginate('5');
+
+        //dd($images);
+
         return view('plant/show', compact('plant', 'images', 'contributions'));
     }
 
@@ -84,6 +87,8 @@ class PlantController extends Controller
      */
     public function destroy(Plant $plant)
     {
-        //
+        $plant->delete();
+
+        return redirect('/home');
     }
 }

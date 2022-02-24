@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\PlantController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PlantController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,10 @@ Auth::routes(['verify' => 'true']);
 
 Route::group(['middleware' => 'verified'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
     Route::get('/plant/{plant}', [PlantController::class, 'show'])->name('Plant_info');
+    Route::get('/plant/delete/{plant}', [PlantController::class, 'destroy'])->name('Delete_plant');
+
+    Route::post('/like/{image}', [LikeController::class, 'store'])->name('Create_like');
 });
 

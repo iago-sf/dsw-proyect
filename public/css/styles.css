@@ -3,3 +3,21 @@
     text-underline-offset: 0.05rem;
     transition-delay: 100ms;
 }
+
+.paginator>nav {
+    width: 100%;
+    margin: auto !important;
+    text-align: center !important;
+}
+
+.paginator>nav>ul {
+    justify-content: center;
+}
+
+.paginator>nav>ul>li>a{
+    color: black !important;
+}
+.paginator>nav>ul>.active>span{
+    background-color: black !important;
+    border-color: black !important;
+}

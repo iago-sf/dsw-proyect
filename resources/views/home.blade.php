@@ -17,17 +17,17 @@
 
                 <div class="row justify-content-center">
                 @foreach($plants as $plant)
-                <div class="col col-md-3 border border-2 border-dark m-3 p-3">
+                <div class="col col-md-3 border-2 border-dark m-3 p-3">
                     <div>{{ $plant->name }}</div>
                     <div>{{ $plant->cientificName }}</div>
-                    <div>{{ $plant->family }} 
-                        @if($plant->family == 'fungie') 
+                    <div>{{ $plant->family }}
+                        @if($plant->family == 'Fungie') 
                             🍄
-                        @elseif($plant->family == 'bush')
+                        @elseif($plant->family == 'Bush')
                             🌿
-                        @elseif($plant->family == 'tree')
+                        @elseif($plant->family == 'Tree')
                             🌳
-                        @elseif($plant->family == 'flower')
+                        @elseif($plant->family == 'Flower')
                             🌻
                         @endif
                     </div>

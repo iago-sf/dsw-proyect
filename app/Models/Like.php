@@ -23,4 +23,14 @@ class Like extends Model
     {
         return $this->belongsTo(Image::class, 'image');
     }
+
+    public function toggle()
+    {
+        if ($this->id) {
+            $this->delete();
+        
+        } else {
+            $this->save();
+        }
+    }
 }
