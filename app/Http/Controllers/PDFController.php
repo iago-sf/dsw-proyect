@@ -24,7 +24,7 @@ class PDFController extends Controller
             'family' => $plant->family,
             'description' => $plant->description,
             'contributions' => $plant->contributions,
-            'image' => $image->image,
+            'image' => is_null($image) ? '' : $image->image,
             'date' => date('m/d/Y')
         ];
         

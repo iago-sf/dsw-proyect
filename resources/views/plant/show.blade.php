@@ -55,7 +55,7 @@
             <div><a class="btn btn-outline-dark w-25 mb-2" href="{{ route('Generate_pdf', $plant->id)}}"><i class="bi bi-filetype-pdf"></i> {{ __('Download') }}</a></div>
             @if(!is_null(Auth::user()))
                 @if(Auth::user()->role == 'mod')
-                <div><button class="btn btn-outline-dark w-25 mb-2"><i class="bi bi-pencil-square"></i> {{ __('Edit') }}</button></div>
+                <div><a class="btn btn-outline-dark w-25 mb-2" href="{{ route('Edit_plant', $plant->id) }}"><i class="bi bi-pencil-square"></i> {{ __('Edit') }}</a></div>
                 @endif
                 @if(Auth::user()->id == $plant->user)
                 <div><button class="btn btn-outline-dark w-25 mb-2" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash"></i> {{ __('Delete') }}</button></div>

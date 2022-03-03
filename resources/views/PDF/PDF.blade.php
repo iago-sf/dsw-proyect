@@ -20,9 +20,11 @@
     </ul>
     @endif
 </div>
+@if($image != '')
 <div style="text-align: center; margin-top: 2rem;">
     <img src="{{ $image }}" alt="Imagen">        
 </div>
+@endif
 
 <div style="position: fixed; bottom: 1rem; left: 45%; text-align: center;">
     {{ $date }}

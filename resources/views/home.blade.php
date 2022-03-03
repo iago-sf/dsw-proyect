@@ -4,6 +4,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @include('flash-message')
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            @include('flash-message')
             <h3 class="text-center">{{ __('Dashboard') }}</h3>
 
             <div class="text-center">

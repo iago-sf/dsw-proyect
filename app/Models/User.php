@@ -56,4 +56,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Contributer::class, 'contributer');
     }
+
+    public function isMod()
+    {
+        if($this->role === 'mod') return true;
+
+        return false;
+    }
 }

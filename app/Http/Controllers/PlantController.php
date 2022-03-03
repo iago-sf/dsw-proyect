@@ -42,7 +42,7 @@ class PlantController extends Controller
         $request->merge(['user' => Auth::id()]); 
         Plant::create($request->all());
 
-        return redirect('home')->with('success','You added a new post!');
+        return redirect('home')->with('success','You added a new plant!');
     }
 
     /**
@@ -67,19 +67,38 @@ class PlantController extends Controller
      */
     public function edit(Plant $plant)
     {
-        //
+        dd($plant);
+        $data = [
+            'id' => $plant->id ?? '',
+            'name' => $plant->name ?? '',
+            'cientificName' => $plant->cientificName ?? '',
+            'description' => $plant->description ?? ''
+        ];
+
+        return view('plant/edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Plant  $plant
+     * @param  \App\Models\PlantForm  $plant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Plant $plant)
+    public function update(Plant $plant, PlantForm $request)
     {
-        //
+        if(!Auth::user()->isMod()) return back();
+
+        $plant->name = $request->name;
+        $plant->description = $request->description;
+        $plant->save();
+
+        if(is_null(Contributer::where('contributer', Auth::id())->where('plant', $plant->id)->get()))
+        {
+            Contributer::create(['contributer' => Auth::id(), 'plant' => $plant->id]);
+        }
+
+        return redirect('plant/'. $plant->id);
     }
 
     /**
@@ -92,6 +111,6 @@ class PlantController extends Controller
     {
         $plant->delete();
 
-        return redirect('/home');
+        return redirect('home')->with('info','Plant deleted correctly.');
     }
 }

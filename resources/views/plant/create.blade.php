@@ -1,13 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <div>Create</div>
+    <div class="row justify-content-center mx-5 align-items-center">
+        <h1 class="col col-md-6 text-center">Add a new plant</h1>
+    </div>
     <form class="row justify-content-center mx-5 align-items-center" method="POST" action="{{ Route('Create_plant') }}">
         <div class="col col-md-8">
             @csrf
             <div class="row mt-3 align-items-center">
                 <div class="col col-md-4 text-end">
-                    Name:
+                   {{ __(' Name') }}:
                 </div>
                 <input class="col col-md-8 text-start w-50 p-1 px-2" type="text" value="{{ old('name') }}" name="name"/>
             </div>
@@ -19,7 +21,7 @@
 
             <div class="row mt-3 align-items-center">
                 <div class="col col-md-4 text-end">
-                    Cientific name:
+                    {{ __('Cientific name') }}:
                 </div>
                 <input class="col col-md-8 text-start w-50 p-1 px-2" type="text" value="{{ old('cientificName') }}" name="cientificName"/>
             </div>
@@ -31,7 +33,7 @@
 
             <div class="row mt-3 align-items-center">
                 <div class="col col-md-4 text-end">
-                    Family:
+                    {{ __('Family') }}:
                 </div>
                 <select class="col col-md-8 text-start w-50 p-1 px-2" name="family">
                     <option disabled selected>Select a plant family</option>
@@ -49,7 +51,7 @@
 
             <div class="row mt-3 align-items-center">
                 <div class="col col-md-4 text-end">
-                    Description:
+                    {{ __('Description') }}:
                 </div>
                 <input class="col col-md-8 text-start w-50 p-1 px-2" type="text" value="{{ old('description') }}" name="description"/>
             </div>
