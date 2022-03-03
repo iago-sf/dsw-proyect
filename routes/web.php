@@ -21,16 +21,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['verify' => 'true']);
+Route::get('generate-pdf/{plant}', [PDFController::class, 'generatePDF'])->name('Generate_pdf');
 
+Route::get('/plant/{plant}', [PlantController::class, 'show'])->name('Plant_info');
+
+Auth::routes(['verify' => 'true']);
 Route::group(['middleware' => 'verified'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::get('/plant/{plant}', [PlantController::class, 'show'])->name('Plant_info');
+    Route::get('/plant', [PlantController::class, 'create'])->name('Create_plant');
+    Route::post('/plant', [PlantController::class, 'store'])->name('Create_plant');
     Route::get('/plant/delete/{plant}', [PlantController::class, 'destroy'])->name('Delete_plant');
 
     Route::post('/like/{image}', [LikeController::class, 'store'])->name('Create_like');
-
-    Route::get('generate-pdf/{plant}', [PDFController::class, 'generatePDF'])->name('Generate_pdf');
 });
 

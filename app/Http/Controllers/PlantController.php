@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PlantForm;
 use App\Models\Contributer;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Plant;
+use Illuminate\Support\Facades\Auth;
 
 class PlantController extends Controller
 {
@@ -26,18 +28,21 @@ class PlantController extends Controller
      */
     public function create()
     {
-        //
+        return view('plant/create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Requests\PlantForm  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PlantForm $request)
     {
-        //
+        $request->merge(['user' => Auth::id()]); 
+        Plant::create($request->all());
+
+        return redirect('home')->with('success','You added a new post!');
     }
 
     /**
@@ -50,8 +55,6 @@ class PlantController extends Controller
     {
         $contributions = Contributer::where('plant', $plant->id)->with('contribution')->get();
         $images = Image::where('plant', $plant->id)->with('likes')->latest('updated_at')->paginate('5');
-
-        //dd($images);
 
         return view('plant/show', compact('plant', 'images', 'contributions'));
     }

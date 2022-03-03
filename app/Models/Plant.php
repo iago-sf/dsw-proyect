@@ -14,6 +14,7 @@ class Plant extends Model
         'cientificName',
         'family',
         'description',
+        'user',
     ];
 
     public function images()
