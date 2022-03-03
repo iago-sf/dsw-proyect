@@ -52,12 +52,12 @@
         </div>
         
         <div class="col col-md-4 text-center">
-            <div><button class="btn btn-outline-dark w-25 mb-2"><i class="bi bi-exclamation-diamond"></i> Report</button></div>
+            <div><a class="btn btn-outline-dark w-25 mb-2" href="{{ route('Generate_pdf', $plant->id)}}"><i class="bi bi-filetype-pdf"></i> {{ __('Download') }}</a></div>
             @if(Auth::user()->role == 'mod')
-            <div><button class="btn btn-outline-dark w-25 mb-2"><i class="bi bi-pencil-square"></i> Edit</button></div>
+            <div><button class="btn btn-outline-dark w-25 mb-2"><i class="bi bi-pencil-square"></i> {{ __('Edit') }}</button></div>
             @endif
             @if(Auth::user()->id == $plant->user)
-            <div><button class="btn btn-outline-dark w-25 mb-2" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash"></i> Delete</button></div>
+            <div><button class="btn btn-outline-dark w-25 mb-2" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash"></i> {{ __('Delete') }}</button></div>
             @endif
         </div>
     </div>

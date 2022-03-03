@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PlantController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,7 @@ Route::group(['middleware' => 'verified'], function () {
     Route::get('/plant/delete/{plant}', [PlantController::class, 'destroy'])->name('Delete_plant');
 
     Route::post('/like/{image}', [LikeController::class, 'store'])->name('Create_like');
+
+    Route::get('generate-pdf/{plant}', [PDFController::class, 'generatePDF'])->name('Generate_pdf');
 });
 
