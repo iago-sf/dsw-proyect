@@ -9,13 +9,13 @@
             @csrf
             <div class="row mt-3 align-items-center">
                 <div class="col col-md-4 text-end">
-                   {{ __(' Name') }}:
+                   {{ __('Name') }}:
                 </div>
                 <input class="col col-md-8 text-start w-50 p-1 px-2" type="text" value="{{ old('name') }}" name="name"/>
             </div>
             @error('name')
             <div class="row align-items-center justify-content-center">
-                <div class="col col-md-4 text-danger mt-2 border-2 border-danger p-2 m-1 mb-2">{{ $message }}</div>
+                <div class="col col-md-4 text-center text-danger mt-2 border border-2 border-danger p-2 m-1 mb-2 bg-soft-red">{{ $message }}</div>
             </div>
             @enderror
 
@@ -27,7 +27,7 @@
             </div>
             @error('cientificName')
             <div class="row align-items-center justify-content-center">
-                <div class="col col-md-4 text-danger mt-2 border-2 border-danger p-2 m-1 mb-2">{{ $message }}</div>
+                <div class="col col-md-4 text-center text-danger mt-2 border border-2 border-danger p-2 m-1 mb-2 bg-soft-red">{{ $message }}</div>
             </div>
             @enderror
 
@@ -45,7 +45,7 @@
             </div>
             @error('family')
             <div class="row align-items-center justify-content-center">
-                <div class="col col-md-4 text-danger mt-2 border-2 border-danger p-2 m-1 mb-2">{{ $message }}</div>
+                <div class="col col-md-4 text-center text-danger mt-2 border border-2 border-danger p-2 m-1 mb-2 bg-soft-red">{{ $message }}</div>
             </div>
             @enderror
 
@@ -57,7 +57,7 @@
             </div>
             @error('description')
             <div class="row align-items-center justify-content-center">
-                <div class="col col-md-4 text-danger mt-2 border-2 border-danger p-2 m-1 mb-2">{{ $message }}</div>
+                <div class="col col-md-4 text-center text-danger mt-2 border border-2 border-danger p-2 m-1 mb-2 bg-soft-red">{{ $message }}</div>
             </div>
             @enderror
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PlantController;
@@ -18,9 +19,7 @@ use App\Http\Controllers\PDFController;
 */
 
 Route::group(['middleware' => 'language'], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('welcome');
+    Route::get('/', [PlantController::class, 'index'])->name('welcome');
 
     Route::get('generate/pdf/{plant}', [PDFController::class, 'generatePDF'])->name('Generate_pdf');
 
@@ -37,5 +36,8 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('/plant/delete/{plant}', [PlantController::class, 'destroy'])->name('Delete_plant');
 
         Route::post('/like/{image}', [LikeController::class, 'store'])->name('Create_like');
+
+        Route::get('/image/{plant}', [ImageController::class, 'create'])->name('Upload_image');
+        Route::post('/image', [ImageController::class, 'store'])->name('Store_image');
     });
 });

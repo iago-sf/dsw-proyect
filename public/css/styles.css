@@ -21,3 +21,11 @@
     background-color: black !important;
     border-color: black !important;
 }
+
+.bg-soft-red{
+    background-color: rgba(255, 0, 0, 0.15) !important;
+}
+
+.h-92{
+    height: 92%;
+}

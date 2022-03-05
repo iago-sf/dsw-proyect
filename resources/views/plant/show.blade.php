@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            @include('flash-message')
+        </div>
+    </div>
     <div class="row justify-content-center mx-5 align-items-center">
         <div class="col col-md-8">
             <div class="row">
@@ -54,6 +59,7 @@
         <div class="col col-md-4 text-center">
             <div><a class="btn btn-outline-dark w-25 mb-2" href="{{ route('Generate_pdf', $plant->id)}}"><i class="bi bi-filetype-pdf"></i> {{ __('Download') }}</a></div>
             @if(!is_null(Auth::user()))
+                <div><a class="btn btn-outline-dark w-25 mb-2" href="{{ route('Upload_image', $plant->id)}}"><i class="bi bi-image"></i> {{ __('Upload photo') }}</a></div>
                 @if(Auth::user()->role == 'mod')
                 <div><a class="btn btn-outline-dark w-25 mb-2" href="{{ route('Edit_plant', $plant->id) }}"><i class="bi bi-pencil-square"></i> {{ __('Edit') }}</a></div>
                 @endif
@@ -63,10 +69,18 @@
             @endif
         </div>
     </div>
-    <div class="row justify-content-center mx-5 p-5">
+    <div class="row justify-content-center align-content-start mx-5 pt-5">
+        <a class="col col-md-2 btn btn-white {{request()->exists('latest') ? 'disabled' : 'border-0 border-bottom border-2 border-dark' }}" href="{{ request()->fullUrlWithQuery(['latest' => '']) }}">Latest</a>
+        <a class="col col-md-2 btn btn-white {{request()->exists('latest') ? 'border-0 border-bottom border-2 border-dark' : 'disabled' }}" href="{{ request()->url() }}">Most popular</a>
+    </div>
+    <div class="row justify-content-center">
         @foreach($images as $image)
             <div class="col col-md-3 m-3 shadow-lg p-2">
-                <img src="{{ $image->image }}" alt="Imagen" class="w-100 mb-2">
+                
+                <div class="row h-92 my-auto align-items-center">
+                    <img src="{{ $image->image }}" alt="Imagen" class="col w-100 mb-2">
+                </div>
+
                 @php 
                     $liked = false;
                     foreach($image->likes as $like)

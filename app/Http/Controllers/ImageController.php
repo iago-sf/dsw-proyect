@@ -2,29 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ImageForm;
 use App\Models\Image;
+use App\Models\Plant;
 
 class ImageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Plant  $plant
      */
-    public function index()
+    public function create(Plant $plant)
     {
-        // return view();
-    }
+        $id = $plant->id;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('image/create', compact('id'));
     }
 
     /**
@@ -33,43 +26,16 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageForm $request)
     {
-        //
-    }
+        $request->file('image')->store('public');
+        $image = new Image();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Image $image)
-    {
-        //
-    }
+        $image->plant = $request->plant;
+        $image->image = asset('storage/'.$request->file('image')->hashName());
+        $image->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Image $image)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Image $image)
-    {
-        //
+        return redirect('plant/' . $request->plant)->with('success', 'Your image was uploaded!');
     }
 
     /**

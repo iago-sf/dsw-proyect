@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Queries\PlantQueries;
 use App\Http\Requests\PlantForm;
 use App\Models\Contributer;
 use App\Models\Image;
@@ -18,7 +19,17 @@ class PlantController extends Controller
      */
     public function index()
     {
-        // return view();
+        $query = new PlantQueries;
+        $search = request()->exists('search') ? trim(request()->get('search'), " ") : '';
+
+        if(request()->exists('search')){
+            $plants = $query->search($search);
+
+        } else {
+            $plants = Plant::latest('updated_at')->paginate('12');
+        }
+
+        return view('welcome', compact('plants'));
     }
 
     /**
@@ -54,7 +65,12 @@ class PlantController extends Controller
     public function show(Plant $plant)
     {
         $contributions = Contributer::where('plant', $plant->id)->with('contribution')->get();
-        $images = Image::where('plant', $plant->id)->with('likes')->latest('updated_at')->paginate('5');
+
+        if(request()->exists('latest')){
+            $images = Image::where('plant', $plant->id)->with('likes')->latest('updated_at')->paginate(9);
+        } else {
+            $images = Image::where('plant', $plant->id)->with('likes')->withCount('likes')->orderBy('likes_count', 'desc')->paginate(9);
+        }
 
         return view('plant/show', compact('plant', 'images', 'contributions'));
     }
