@@ -1,5 +1,5 @@
 {
-    "Login": "Iniciar sesión",
+    "Login": "Acceder",
     "Register": "Registrarse",
     "You are logged in!": "¡Has iniciado sesión",
     "Dashboard": "Panel de control",
@@ -18,14 +18,18 @@
     "Reset Password": "Actualizar contraseña",
     "Send Password Reset Link": "Enviar enlace de recuperación de contraseña",
     
-    "Are you sure about deleting this plant?": "",
-    "Have in mind that this changes can not be reverted.": "",
-    "Close": "",
-    "Go ahead": "",
-    "Download": "",
-    "Edit": "",
-    "Delete": "",
-    "Cientific name": "",
-    "Family": "",
-    "Description": ""
+    "Are you sure about deleting this plant?": "¿Estás seguro de eliminar esta planta?",
+    "Have in mind that this changes can not be reverted.": "Ten en cuenta que este cambio no podrá deshacerse.",
+    "Close": "Cerrar",
+    "Go ahead": "Adelante",
+    "Download": "Descargar",
+    "Edit": "Editar",
+    "Delete": "Eliminar",
+    "Cientific name": "Nombre científico",
+    "Family": "Familia",
+    "Description": "Descripción",
+
+    "Error 404": "Error 404",
+    "Unluckily the page you are looking for is not available any more.": "Desafortunadamente la página a la que intenta acceder no se encuentra disponible.",
+    "Return to homepage.": "Volver a la página principal."
 }

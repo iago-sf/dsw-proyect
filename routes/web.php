@@ -17,24 +17,25 @@ use App\Http\Controllers\PDFController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'language'], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('welcome');
+
+    Route::get('generate/pdf/{plant}', [PDFController::class, 'generatePDF'])->name('Generate_pdf');
+
+    Route::get('/plant/{plant}', [PlantController::class, 'show'])->name('Plant_info');
+
+    Auth::routes(['verify' => 'true']);
+    Route::group(['middleware' => 'verified'], function () {
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+        Route::get('/plant', [PlantController::class, 'create'])->name('Create_plant');
+        Route::post('/plant', [PlantController::class, 'store'])->name('Create_plant');
+        Route::get('/plant/edit/{plant}', [PlantController::class, 'edit'])->name('Edit_plant');
+        Route::post('/plant/edit/{plant}', [PlantController::class, 'update'])->name('Update_plant');
+        Route::get('/plant/delete/{plant}', [PlantController::class, 'destroy'])->name('Delete_plant');
+
+        Route::post('/like/{image}', [LikeController::class, 'store'])->name('Create_like');
+    });
 });
-
-Route::get('generate/pdf/{plant}', [PDFController::class, 'generatePDF'])->name('Generate_pdf');
-
-Route::get('/plant/{plant}', [PlantController::class, 'show'])->name('Plant_info');
-
-Auth::routes(['verify' => 'true']);
-Route::group(['middleware' => 'verified'], function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-    Route::get('/plant', [PlantController::class, 'create'])->name('Create_plant');
-    Route::post('/plant', [PlantController::class, 'store'])->name('Create_plant');
-    Route::get('/plant/edit/{plant}', [PlantController::class, 'edit'])->name('Edit_plant');
-    Route::post('/plant/edit/{plant}', [PlantController::class, 'update'])->name('Update_plant');
-    Route::get('/plant/delete/{plant}', [PlantController::class, 'destroy'])->name('Delete_plant');
-
-    Route::post('/like/{image}', [LikeController::class, 'store'])->name('Create_like');
-});
-
