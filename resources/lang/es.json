@@ -37,5 +37,10 @@
     "Welcome to PlantPedia": "Bienvenido a PlantPedia",
     "The biggest plant encyclopedia run by the community": "La enciclopedia de plantas mas grande creada por la comunidad",
     "Show all info": "Detalles",
-    "Add a new plant": "Añadir una planta"
+    "Add a new plant": "Añadir una planta",
+
+    "If you click accept you will become a moderator": "Si pulsas aceptar te volverás un moderador",
+    "By doing so you will have a great responsability and those priviledges can be rovoked at any time.": "Haciendolo tendrás una gran reponsabilidad y esos derechos pueden serte revocados en cualquier momento.",
+    "Accept": "Aceptar",
+    "Become a mod": "Volverse mod"
 }

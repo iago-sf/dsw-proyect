@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row justify-content-center">
+    <div class="row justify-content-center m-0 p-0">
         <div class="col-md-8">
             @include('flash-message')
         </div>
@@ -73,7 +73,7 @@
         <a class="col col-md-2 btn btn-white {{request()->exists('latest') ? 'disabled' : 'border-0 border-bottom border-2 border-dark' }}" href="{{ request()->fullUrlWithQuery(['latest' => '']) }}">Latest</a>
         <a class="col col-md-2 btn btn-white {{request()->exists('latest') ? 'border-0 border-bottom border-2 border-dark' : 'disabled' }}" href="{{ request()->url() }}">Most popular</a>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center m-0 p-0">
         @foreach($images as $image)
             <div class="col col-md-3 m-3 shadow-lg p-2">
                 

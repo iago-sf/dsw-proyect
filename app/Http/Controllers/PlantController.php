@@ -83,7 +83,8 @@ class PlantController extends Controller
      */
     public function edit(Plant $plant)
     {
-        dd($plant);
+        if(!Auth::user()->isMod()) return back()->with('error', 'You have to be a moderator to perform this action.');
+
         $data = [
             'id' => $plant->id ?? '',
             'name' => $plant->name ?? '',
@@ -98,20 +99,20 @@ class PlantController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PlantForm  $plant
+     * @param  \App\Models\Plant  $plant
      * @return \Illuminate\Http\Response
      */
-    public function update(Plant $plant, PlantForm $request)
+    public function update(Plant $plant, Request $request)
     {
-        if(!Auth::user()->isMod()) return back();
+        if(!Auth::user()->isMod()) return back()->with('error', 'You have to be a moderator to perform this action.');
 
         $plant->name = $request->name;
         $plant->description = $request->description;
         $plant->save();
 
-        if(is_null(Contributer::where('contributer', Auth::id())->where('plant', $plant->id)->get()))
+        if(count(Contributer::where('contributer', Auth::id())->where('plant', $plant->id)->get()) == 0)
         {
-            Contributer::create(['contributer' => Auth::id(), 'plant' => $plant->id]);
+            Contributer::create(['contributer' => Auth::id(), 'plant' => $plant->id])->save();
         }
 
         return redirect('plant/'. $plant->id);

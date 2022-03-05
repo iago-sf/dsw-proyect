@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PlantController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ Route::group(['middleware' => 'language'], function () {
 
     Auth::routes(['verify' => 'true']);
     Route::group(['middleware' => 'verified'], function () {
+        Route::get('be/mod/{user}', [UserController::class, 'update'])->name('User_update');
+
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
         Route::get('/plant', [PlantController::class, 'create'])->name('Create_plant');
