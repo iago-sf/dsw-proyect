@@ -14,23 +14,12 @@
 </footer>
 
 @if(!is_null(Auth::user()) && Auth::user()->role != 'mod')
-<div class="modal fade" id="updateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">{{ __('If you click accept you will become a moderator') }}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <small>{{ __('By doing so you will have a great responsability and those priviledges can be rovoked at any time.') }}</small>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
-            <a href="{{ Route('User_update', Auth::id()) }}" class="btn btn-dark">{{ __('Accept') }}</a>
-        </div>
-        </div>
-    </div>
-</div>
+{{ Alert::modal(
+    'update',
+    'If you click accept you will become a moderator',
+    'By doing so you will have a great responsability and those priviledges can be rovoked at any time.',
+    Route('User_update', Auth::id())
+) }}
 @endif
 
 <script>

@@ -107,22 +107,11 @@
     <div class="w-25 m-auto paginator">{{ $images->appends($_GET)->links('pagination::bootstrap-4') }}</div>
 
     @if(!is_null(Auth::user()) && Auth::user()->id == $plant->user)
-    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">{{ __('Are you sure about deleting this plant?') }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <small>{{ __('Have in mind that this changes can not be reverted.') }}</small>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
-                <a href="{{ Route('Delete_plant', $plant) }}" class="btn btn-dark">{{ __('Go ahead') }}</a>
-            </div>
-            </div>
-        </div>
-    </div>
+    {{ Alert::modal(
+        'delete',
+        'Are you sure about deleting this plant?',
+        'Have in mind that this changes can not be reverted.',
+        Route('Delete_plant', $plant)
+    ) }}
     @endif
 @endsection

@@ -165,6 +165,9 @@ return [
         /*
          * Package Service Providers...
          */
+        Barryvdh\DomPDF\ServiceProvider::class,
+
+        App\Providers\AlertServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -174,9 +177,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        Barryvdh\DomPDF\ServiceProvider::class,
-
     ],
 
     /*
@@ -232,6 +232,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
+        'Alert' => App\MyService\Facades\Alert::class,
     ],
 
 ];
