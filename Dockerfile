@@ -1,49 +1,36 @@
-FROM php:8.0-fpm
+FROM php:8.1-apache
+RUN a2enmod rewrite
 
-# Copy composer.lock and composer.json
-COPY composer.lock composer.json /var/www/
-
-# Set working directory
-WORKDIR /var/www
-
-# Install dependencies
 RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    locales \
-    zip \
-    jpegoptim optipng pngquant gifsicle \
-    vim \
-    unzip \
-    git \
-    curl
+    zlib1g-dev \
+    libicu-dev \
+    libxml2-dev \
+    libpq-dev \
+    libzip-dev \
+    && docker-php-ext-install pdo pdo_mysql zip intl soap opcache \
+    && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd
+RUN apt-get update -y
 
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+# Add Node 16
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -- \
+    && apt-get install -y nodejs \
+    && apt-get autoremove -y
 
-# Install extensions
-RUN docker-php-ext-install pdo_mysql exif pcntl
-RUN docker-php-ext-configure gd 
-RUN docker-php-ext-install gd
+RUN apt update
+RUN apt-cache search mysql
+RUN apt install mariadb-server -y
 
-# Install composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/.env-prod /var/www/html/.env
+COPY docker/php.ini /usr/local/etc/php/php.ini
 
-# Add user for laravel application
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
+ENV COMPOSER_ALLOW_SUPERUSER 1
+COPY . /var/www/html/
+WORKDIR /var/www/html/
+RUN chown -R www-data:www-data /var/www/html \
+    && composer install --optimize-autoloader --no-dev && composer dumpautoload
 
-#Copy .env for production
-COPY .env-prod /var/www/.env
-
-# Copy existing application directory permissions
-COPY --chown=www:www . /var/www
-
-# Change current user to www
-USER www
-
-# Expose port 9000 and start php-fpm server
-EXPOSE 9000
-CMD ["php-fpm"]
+RUN php artisan route:cache
+RUN php artisan config:cache
+RUN php artisan view:cache

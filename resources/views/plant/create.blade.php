@@ -4,7 +4,7 @@
     <div class="row justify-content-center mx-5 align-items-center">
         <h1 class="col col-md-6 text-center">Add a new plant</h1>
     </div>
-    <form class="row justify-content-center mx-5 align-items-center" method="POST" action="{{ Route('Create_plant') }}">
+    <form class="row justify-content-center mx-5 align-items-center" method="POST" action="{{ Route('Store_plant') }}">
         <div class="col col-md-8">
             @csrf
             <div class="row mt-3 align-items-center">

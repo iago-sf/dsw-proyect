@@ -33,7 +33,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
         Route::get('/plant', [PlantController::class, 'create'])->name('Create_plant');
-        Route::post('/plant', [PlantController::class, 'store'])->name('Create_plant');
+        Route::post('/plant', [PlantController::class, 'store'])->name('Store_plant');
         Route::get('/plant/edit/{plant}', [PlantController::class, 'edit'])->name('Edit_plant');
         Route::post('/plant/edit/{plant}', [PlantController::class, 'update'])->name('Update_plant');
         Route::get('/plant/delete/{plant}', [PlantController::class, 'destroy'])->name('Delete_plant');
